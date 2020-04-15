@@ -1,0 +1,30 @@
+pipeline {
+		agent any
+		stages {
+			
+				stage('Clone Repo') {
+						sh 'rm -rf pipelinetesting'
+						sh 'git clone https://github.com/rameshsampathi/pipelinetesting.git'
+				}
+		 
+				stage('Build Docker image') {
+						sh 'cd /var/lib/jenkins/workspace/pipeline2/pipelinetesting'
+						sh 'cp /var/lib/jenkins/workspace/pipeline2/pipelinetesting/* /var/lib/jenkins/workspace/pipeline2'
+						sh 'docker build -t sampathiramesh/pipelinetest:v1 .'
+				}
+					
+				stage('puash image to docker hub') {
+						sh 'docker push sampathiramesh/pipelinetest:v1 '
+				}
+			 
+				stage('deploy to docker host') {
+					sh 'docker -H tcp://10.50.3.167:2375 run --rm -dit --name webapp1 --hostname webapp1 -p 9000:80 sampathiramesh/pipelinetest:v1'
+					 
+				}
+
+				stage('check webapp reachability') {
+					sh 'sleep 10s'
+					sh 'curl http://ec2-3-210-201-157.compute-1.amazonaws.com:9000'
+				}
+		}
+}		            
