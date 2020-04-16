@@ -1,19 +1,19 @@
 pipeline{
-	agent any
+    agent any
 
-	environment{
-		PATH = "/opt/maven-3.6.3/bin:$PATH"
-	}	
-	stages{
-		stage("Git Clone"){
-			steps{
-				sh 'https://github.com/rameshsampathi/pipelinetesting.git'
-			}    
-		}
-		stage("Maven Build"){
-			steps{
-				sh 'mvn clean package'
-			}
-		}           
+    environment{
+	PATH = "/opt/maven-3.6.3/bin:$PATH"
+    }	
+    stages{
+	stage("Git Clone"){
+	    steps{
+	        sh 'https://github.com/rameshsampathi/pipelinetesting.git'
+	    }    
 	}
+	stage("Maven Build"){
+            steps{
+		sh 'mvn clean package'
+	    }
+	}           
+    }
 }                     
