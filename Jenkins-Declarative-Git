@@ -5,7 +5,7 @@ pipeline{
 		PATH = "/opt/maven-3.6.3/bin:$PATH"
 	}	
 	stages{
-		stage("Git Checkout"){
+		stage("Git Clone"){
 			steps{
 				sh 'https://github.com/rameshsampathi/pipelinetesting.git'
 			}    
@@ -16,4 +16,4 @@ pipeline{
 			}
 		}           
 	}
-}                  
+}                     
