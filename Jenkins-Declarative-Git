@@ -7,7 +7,7 @@ pipeline{
 	stages{
 		stage("Git Checkout"){
 			steps{
-				sh 'https://github.com/rameshsampathi/pipelinetest.git'
+				sh 'https://github.com/rameshsampathi/pipelinetesting.git'
 			}    
 		}
 		stage("Maven Build"){
